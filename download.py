@@ -76,10 +76,11 @@ def error_labels_to_ids(error_labels):
 def main():
     """ main script entry point """
     args = get_arguments()
-    print(args.db_info_api)
     try:
+        print("tring to get list of database...")
         # the db_info_api sends a json file with a list of all public database entries
         db_entries_list = requests.get(url=args.db_info_api).json()
+        print("recived list of database.")
     except:
         print("Server request failed.")
         raise
