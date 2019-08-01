@@ -1,4 +1,3 @@
-import pandas as pd
 import glob, os
 import csv
 
@@ -23,25 +22,16 @@ def main():
                     timestamp = row[0]
                     if (timestamp < states[last_timestamp_index][0]):
                         row.append(states[last_timestamp_index][1])
-                    elif (len(states) >= last_timestamp_index):
+                    elif (len(states)-1 <= last_timestamp_index):
                         row.append(states[last_timestamp_index][1])
                     else:
                         last_timestamp_index = last_timestamp_index + 1
                         row.append(states[last_timestamp_index][1])
                 new_csv.append(row)
-        with open("out.csv", "w", newline="") as f:
+        with open(real_name + "/" + real_name + "_vehicle_local_position_with_state_0.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerows(new_csv)
         break
-        # print(real_name)
-        # states_file = real_name + "/" + real_name + "_vehicle_status_0.csv"
-        # location_file = real_name + "/" + real_name + "_vehicle_local_position_0.csv"
-        # state = pd.read_csv(states_file)
-        # location = pd.read_csv(location_file)
-        # location = location.dropna(axis=1)
-        # merged = state.merge(location, on='timestamp')
-        # merged.to_csv(real_name + "/" + real_name + "_output.csv", index=False)
-        # break
 
 if __name__ == '__main__':
     main()
