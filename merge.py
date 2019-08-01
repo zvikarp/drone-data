@@ -4,8 +4,8 @@ import csv
 def main():
     os.chdir("data/csv")
     for root, dirs, files in os.walk(".", topdown=False):
-        print(root)
         real_name = root[2:]
+        if (real_name == ""): continue
         states = []
         with open(real_name + "/" + real_name + "_vehicle_status_0.csv") as csvfile:
             readCSV = csv.reader(csvfile, delimiter=',')
@@ -31,7 +31,6 @@ def main():
         with open(real_name + "/" + real_name + "_vehicle_local_position_with_state_0.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerows(new_csv)
-        break
 
 if __name__ == '__main__':
     main()
